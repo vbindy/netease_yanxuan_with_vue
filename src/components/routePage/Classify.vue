@@ -1,11 +1,15 @@
 <template>
   <div>
-    <HeaderTop></HeaderTop>
+    <div class="wei">
+      <HeaderTop></HeaderTop>
+    </div>
+
+
     <div class="wrap">
       <div class="youbian">
         <ul class="section-item">
           <li class="section-name" v-for="item in items">
-            {{ item.message }}
+            {{ item.name }}
           </li>
         </ul>
       </div>
@@ -51,11 +55,12 @@
           <span class="content-one-item">
               <span class="content-one-img"></span>
               <span class="content-one-text">三石福利价</span>
-            </span> 
+            </span>
         </div>
       </div>
 
     </div>
+    <div class="wei2"></div>
   </div>
 
 </template>
@@ -66,25 +71,16 @@
       name: "classify",
       data() {
         return {
-          items: [
-            {message: '12.12专区'},
-            {message: '冬季专区'},
-            {message: '爆品专区'},
-            {message: '新品专区'},
-            {message: '居家'},
-            {message: '洗护'},
-            {message: '饮食'},
-            {message: '餐厨'},
-            {message: '婴童'},
-            {message: '特色区'},
-            {message: '文体'},
 
-            {message: '餐厨'},
-            {message: '婴童'},
-            {message: '特色区'},
-            {message: '文体'}
-          ]
         }
+      },
+      computed:{
+        items(){
+          return this.$store.state.know
+        }
+      },
+      mounted () {
+        this.$store.dispatch('getClassify')
       },
       components: {
         HeaderTop
@@ -96,12 +92,40 @@
 
 
 <style scoped lang="stylus">
+@import "../../common/stylus/mixins.styl"
+  .wei
+    position relative
+    border none
+    &:after
+      content ''
+      position fixed
+      left 0
+      top 41px
+      width 100%
+      height 1px
+      background-color #ECECEC
+      transform scaleY(0.5)
+      z-index 11111
   .wrap
-    margin-top 47px
+    margin-top 55px
+
     .youbian
+      position relative
+      border none
+      &:after
+        content ''
+        position fixed
+        left 78px
+        top -246px
+        width 1px
+        height 173%
+        background-color #ECECEC
+        transform scaleY(0.5)
+        z-index 11111
       zoom 1
+
       float left
-      border-right 2px solid #F5F5F5
+      border-right 2px /*#F5F5F5*/
       margin-right 10px
       .section-item
         /*top-border-1px(#ab2b2b)*/
@@ -139,4 +163,19 @@
              text-align center
              font-size 12px
 
+
+  .wei2
+      position relative
+      border none
+      &:before
+        content ''
+        position fixed
+        left 0px
+        bottom 46px
+        width 100%
+        height 1px
+        background-color #ECECEC
+        transform scaleY(0.5)
+        z-index 11111
+      zoom 1
 </style>

@@ -17,14 +17,14 @@
 
 <template>
   <footer class="footer_guide border-1px">
-    <div class="guide_item" @click="goto('/firstpage')" ><!--:class="{on: isCurrent('/firstpage')}"-->
+    <div class="guide_item" @click="goto('/firstpage')" :class="{on: isCurrent('/firstpage')}" ><!---->
       <span class="item_icon">
         <i class="iconfont icon-shouye"></i>
       </span>
       <span>首页</span>
     </div>
     <!--2-->
-    <div class="guide_item" @click="goto('/classify')" ><!--:class="{on: isCurrent('/classify')}"-->
+    <div class="guide_item" @click="goto('/classify')" :class="{on: isCurrent('/classify') }">
       <span class="item_icon">
         <i class="iconfont icon-shujia"></i>
       </span>
@@ -32,7 +32,7 @@
     </div>
 
 
-    <div class="guide_item" @click="goto('/discernment')" ><!--:class="{on: isCurrent('/discernment')}"-->
+    <div class="guide_item" @click="goto('/discernment')" :class="{on: isCurrent('/discernment')}" >
       <span class="item_icon">
         <i class="iconfont icon-shitu"></i>
       </span>
@@ -40,13 +40,13 @@
     </div>
 
 
-    <div class="guide_item" @click="goto('/shoppingcar')" ><!--:class="{on: isCurrent('/shoppingcar')}"-->
+    <div class="guide_item" @click="goto('/shoppingcar')" :class="{on: isCurrent('/shoppingcar')}">
       <span class="item_icon">
         <i class="iconfont icon-gouwuche"></i>
       </span>
       <span>购物车</span>
     </div>
-    <div class="guide_item" @click="goto('/profile')" ><!--:class="{on: isCurrent('/profile')}"-->
+    <div class="guide_item" @click="goto('/profile')" :class="{on: isCurrent('/profile')}">
       <span class="item_icon">
         <i class="iconfont icon-geren"></i>
       </span>

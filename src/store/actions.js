@@ -2,125 +2,127 @@
 vuex的actions模块
  */
 import {
-  reqAddress,
-  reqCategorys,
-  reqShops,
-  reqUser,
-  reqShopGoods,
-  reqShopRatings,
-  reqShopInfo,
-  reqSearchGoods,
-  reqLogout
+
+  reqShoppingInfo,
+  reqLbtList,
+  reqNetEaseText,
+  reqShopSea,
+  reqMisteNav,
+  reqMisteNavTwo,
+  reqClassify,
+  reqKnowThing,
+  reqOneOther
 } from '../api'
 
 import {
-  RECEIVE_ADDRESS,
-  RECEIVE_CATEGORYS,
-  RECEIVE_SHOPS,
-  RECEIVE_USER_INFO,
   RECEIVE_INFO,
-  RESET_USER_INFO,
-  RECEIVE_RATINGS,
-  RECEIVE_SEARCH_SHOPS,
-  RECEIVE_GOODS,
-  INCRMENT_FOOD_COUNT,
-  DECRMENT_FOOD_COUNT,
-  CLEAR_CART,
+  RECEIVE_SEA,
+  RECEIVE_TEXT,
+  RECEIVE_LBT,
+  RECEIVE_NAV,
+  RECEIVE_TWO,
+  RECEIVE_ONE_OTHER,
+  RECEIVE_CLASSIFY,
+    RECEIVE_KNOW
 } from './mutation-types'
 
 export default {
-  // 异步获取地址
-  async getAddress({commit, state}) {
-    const geohash = state.latitude + ',' + state.longitude
-    const result = await reqAddress(geohash)
-    commit(RECEIVE_ADDRESS, {address: result.data})
-  },
+  // 异步获取数据
 
-  // 异步获取分类列表
-  async getCategorys({commit}) {
-    const result = await reqCategorys()
-    commit(RECEIVE_CATEGORYS, {categorys: result.data})
-  },
-
-  // 异步获取商家列表
-  async getShops({commit, state}) {
-    const {latitude, longitude} = state
-    const result = await reqShops({latitude, longitude})
-    commit(RECEIVE_SHOPS, {shops: result.data})
-  },
-
-  //异步搜索商家列表
-  async searchShop({commit, state}, keyword) {
-    const {latitude, longitude} = state
-    const result = await reqSearchGoods(latitude+','+longitude, keyword)
-    commit(RECEIVE_SEARCH_SHOPS, {searchShops: result.data})
-  },
-
-  //记录用户信息
-  recordUserInfo({commit}, userInfo) {
-    commit(RECEIVE_USER_INFO, {userInfo})
-  },
-
-  // 异步获取用户信息
-  async getUserInfo({commit}) {
-    const result = await reqUser()
+  // 异步  获取分类
+  async getClassify({commit}) {
+    const result = await reqClassify()
     if(result.code===0) {
-      commit(RECEIVE_USER_INFO, {userInfo: result.data})
+      const classify = result.data
+      commit(RECEIVE_CLASSIFY, {classify})
+
+      console.log("---action---",this.result.data)
     }
   },
 
-  async logout({commit}) {
-    const result = await reqLogout()
+  // 异步  获取识物
+  async getKnowThing({commit}) {
+    const result = await reqKnowThing()
     if(result.code===0) {
-      commit(RESET_USER_INFO)
+      const know = result.data
+      commit(RECEIVE_KNOW, {know})
+
+      console.log("---action---",this.result)
     }
   },
 
-  // 异步获取商家信息
-  async getShopInfo({commit}, cb) {
-    const result = await reqShopInfo()
+  // 异步获取  首页其他
+  async getOneOther({commit}) {
+    const result = await reqOneOther()
+    if(result.code===0) {
+      const oneOther = result.data
+      commit(RECEIVE_ONE_OTHER, {oneOther})
+      console.log("---action---",this.result)
+    }
+  },
+
+
+
+  // 异步获取中间下面商品价格信息
+  async getMisteNavTwo({commit}) {
+    const result = await reqMisteNavTwo()
+    if(result.code===0) {
+      const two = result.data
+      commit(RECEIVE_TWO, {two})
+
+      console.log("---action---",this.result)
+    }
+  },
+
+  // 异步获取商品信息
+  async getShoppingInfo({commit}) {
+    const result = await reqShoppingInfo()
     if(result.code===0) {
       const info = result.data
-      info.score = 3.5
       commit(RECEIVE_INFO, {info})
-
-      cb && cb()
+      // cb && cb()
     }
   },
 
-  // 异步获取商家评价列表
-  async getShopRatings({commit}, cb) {
-    const result = await reqShopRatings()
+  // 异步获取海外直采信息
+  async getShopSea({commit}) {
+    const result = await reqShopSea()
     if(result.code===0) {
-      const ratings = result.data
-      commit(RECEIVE_RATINGS, {ratings})
+      const sea = result.data
+      commit(RECEIVE_SEA, {sea})
 
-      cb && cb()
+
     }
   },
 
-  // 异步获取商家商品列表
-  async getShopGoods({commit}, cb) {
-    const result = await reqShopGoods()
+  //异步获取首页网易自营文本信息
+  async getNetEaseText({commit}) {
+    const result = await reqNetEaseText()
     if(result.code===0) {
-      const goods = result.data
-      commit(RECEIVE_GOODS, {goods})
-      // 如果组件中传递了接收消息的回调函数, 数据更新后, 调用回调通知调用的组件
-      cb && cb()
+      const text = result.data
+      commit(RECEIVE_TEXT, {text})
+
     }
   },
 
-  // 增加/减少指定食物的数量
-  updateFoodCount ({commit}, {food, isAdd}) {
-    if(isAdd) {
-      commit(INCRMENT_FOOD_COUNT, {food})
-    } else {
-      commit(DECRMENT_FOOD_COUNT, {food})
+  //异步获取首页轮播图信息
+  async getLbtList({commit}) {
+    const result = await reqLbtList()
+    if(result.code===0) {
+      const lbt = result.data
+      commit(RECEIVE_LBT, {lbt})
+
     }
   },
 
-  // 清空购物车
-  clearCart ({commit}, foods) {
-    commit(CLEAR_CART, {foods})
+  //异步获取首页轮播图上面的文字信息
+  async getMisteNav({commit}) {
+    const result = await reqMisteNav()
+    if(result.code===0) {
+      const nav = result.data
+      commit(RECEIVE_NAV, {nav})
+
+    }
   },
+
 }

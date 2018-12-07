@@ -1,13 +1,17 @@
 <template>
   <div class="title-wrap">
-    <span class="title">
-      </span>
+    <slot name="logo">
+
+    </slot>
+
     <span class="search">
       <i class="iconfont icon-sousuo"></i>
       <i class="search-kuang">搜索商品, 共19899款好物</i>
+      </span>
+<slot name="login">
 
-    </span>
-    <a href="javascript:;" class="login">登录</a>
+</slot>
+
 
 
   </div>
@@ -27,7 +31,7 @@
     left 0
     top 0
     margin 0
-    padding 10px 10px 5px 10px
+    padding 10px 10px 10px 10px
     width 100%
     height 30px
 

@@ -8,6 +8,7 @@ import Classify from '../components/routePage/Classify.vue'
 import Discernment from '../components/routePage/Discernment.vue'
 import ShoppingCar from '../components/routePage/ShoppingCar.vue'
 import Profile from '../components/routePage/Profile.vue'
+import NotFound from '../components/page/NotFound.vue'
 
 Vue.use(VueRouter)
 
@@ -38,6 +39,10 @@ export default new VueRouter({
     {
       path: '/profile',
       component: Profile,
+    },
+ {
+      path: '/*',
+      component: NotFound,
     }
 
 
